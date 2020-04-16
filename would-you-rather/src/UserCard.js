@@ -28,9 +28,9 @@ class UserCard extends React.Component{
     render(){
         const {author,question,pollType,unanswered=null,badPath} = this.props
         
-        const color = unanswered==true?'#21ba45':'#2185d0'
-        const top = unanswered==null?'1px solid gray':`1px solid ${color}`
-        if(badPath==true){
+        const color = unanswered===true?'#21ba45':'#2185d0'
+        const top = unanswered===null?'1px solid gray':`1px solid ${color}`
+        if(badPath===true){
             return <Redirect to="/questions/bad_id" />
         }
         return(
@@ -65,7 +65,7 @@ function mapStateToProps({users,questions,authUser},{match,question_id}){
         question = questions[question_id]
         const user = users[authUser]
 
-        if(question==undefined){
+        if(question===undefined){
             badPath=true
         }else{
             author=users[question.author]

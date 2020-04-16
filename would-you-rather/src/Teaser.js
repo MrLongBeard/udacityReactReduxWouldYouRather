@@ -11,9 +11,9 @@ class Teaser extends React.Component{
     render(){
         const {question,unanswered} = this.props
         console.log('question',question)
-        const btnColor = unanswered==true?'#21ba45':'#2185d0' 
-        const btnText = unanswered==true?'Answer Poll':'Result'
-        if(this.state.viewPoll==true){
+        const btnColor = unanswered===true?'#21ba45':'#2185d0' 
+        const btnText = unanswered===true?'Answer Poll':'Result'
+        if(this.state.viewPoll===true){
             return <Redirect push to={`/questions/${question.id}`}/>
         }
         return(

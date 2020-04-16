@@ -1,33 +1,33 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {connect} from 'react-redux'
 import {setAuthUser} from './actions/authUser'
 import {Grid} from '@material-ui/core'
+import {useHistory} from 'react-router-dom'
 
-class Login extends React.Component{
-    state={
+
+function Login(props){
+    const [state,setState]=useState({
         loading:false,
         value:''
-    }
-    onChange=(event)=>{
+    })
+    const history=useHistory()
+    const onChange=(event)=>{
         
-        this.setState({value:event.target.value})
+        setState({...state,value:event.target.value})
     }
-    handleLoading=()=>{
-        this.setState({loading:true})
-    }
-    handleSubmit=(event)=>{
+    
+    const handleSubmit=async (event)=>{
         event.preventDefault()
-        this.props.dispatch(setAuthUser(this.state.value))
-
+        await props.dispatch(setAuthUser(state.value))
+        history.push('/')
     }
-    render(){
-        const {users} = this.props
-        const {value} = this.state
-        const disabled = value===''?true:false
+    
+        const {users} = props
+        const disabled = state.value===''?true:false
         return(
             <div>
-                <form onSubmit={this.handleSubmit}>
-                <Grid container direction="column" justify="center" alignItems="center" xs={12}> 
+                <form onSubmit={handleSubmit}>
+                <Grid container direction="column" justify="center" alignItems="center"> 
                     <Grid item>
                         <h1>
                             Would You Rather
@@ -35,7 +35,7 @@ class Login extends React.Component{
                     </Grid>
                     <Grid item>
                         
-                            <select defaultValue={value} placeholder='select user' onChange={(event)=>this.onChange(event)}>
+                            <select defaultValue={state.value} placeholder='select user' onChange={(event)=>onChange(event)}>
                                 <option value=''>select user</option>
                                 {users.map(user=>
                                 <option key={user.id} value={user.id}>
@@ -55,7 +55,7 @@ class Login extends React.Component{
                 
             </div>
         )
-    }
+    
 }
 
 function mapStateToProps({users}){

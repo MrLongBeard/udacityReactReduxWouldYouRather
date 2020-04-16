@@ -26,9 +26,9 @@ class NewPoll extends React.Component{
     }
     render(){
         const {opt1,opt2,submit} = this.state
-        const disabled = opt1==''||opt2==''
+        const disabled = opt1===''||opt2===''
 
-        if(submit==true){
+        if(submit===true){
             return <Redirect to='/'/>
         }
         return(

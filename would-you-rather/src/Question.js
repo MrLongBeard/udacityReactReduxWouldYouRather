@@ -20,7 +20,7 @@ class Question extends React.Component{
         const {value} = this.state
         const {question} = this.props
         console.log('question',question)
-        const disabled = value==''?true:false
+        // const disabled = value===''?true:false
         return(
             <div>
                 <form onSubmit={this.handleSubmit}>
